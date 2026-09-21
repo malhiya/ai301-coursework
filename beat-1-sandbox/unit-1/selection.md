@@ -278,6 +278,7 @@ issue-01:
 ```
 
 **Check rationale**
+
 Quoted from `rubric.md` as currently written:
 
 `| maintainer_merging | Last 5 default-branch commits and their authors (Repo facts) | At least one of the last 5 commits is from the last 60 days and was made by a person. A bot commit only counts if it merged a person's PR. | required |`
@@ -286,10 +287,7 @@ I wrote it this way because a repo with recent code changes but no real person b
 
 **Trade-offs**
 
-[What the quoted check gives up. Any one of these is a complete answer: an issue whose
-result it changes, a canary you re-ran with `--only`, a case you accept it will miss, or a
-stated reason nothing changed elsewhere. "Nothing changed, and here is how I know" earns
-the point in full when the reason follows.]
+`maintainer_merging` only checks who made the last 5 commits and when, so it can't tell whether maintainers answer new contributors. On issue-01 it passed with "Last 5 default-branch commits all dated 2026-08-04 (1 day before capture), authored by named humans codewithdaniel1 and danyeaw", while `maintainer_replying` failed with "Only #16275 of 5 sampled issues got a maintainer reply, and it took 32.9 days". I accept this gap because `maintainer_replying` is preferred and never changes a verdict, and the gold label for issue-01 is accept.
 
 ---
 
