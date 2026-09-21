@@ -50,7 +50,7 @@ https://github.com/codepath/pathreview-ai301-fa26-s3/issues/54
       ],
       "verdict": "accept"
     }
-    ```
+```
 
 **The verdict must record `accept` for this issue.** Choose an issue your own skill
 accepts. If your skill rejects every candidate you try, that is a signal about your
