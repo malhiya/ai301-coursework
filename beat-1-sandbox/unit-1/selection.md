@@ -74,11 +74,75 @@ Quote source text directly in each field below. Paraphrase does not satisfy them
 only one run occurred. **The last score in your list must match the agreement line in the
 `eval-run.txt` you committed** — that file is the record of your final run.]
 
+1. `agreement: 2/3 scored items` (smoke run, `--limit 3`)
+2. `agreement: 0/1 scored items` (`--only issue-01`)
+3. `agreement: 0/1 scored items` (`--only issue-01`, again after rewording `scope_bounded`)
+4. `agreement: 1/1 scored items` (`--only issue-01`, after `scope_bounded` became a title-only test)
+5. `agreement: 18/20 scored items  (bar: 18/20: PASS)` (full run, saved as `eval-run.txt`)
+
+
 **Issue analysis**
 
 [One scored issue, identified by id (`issue-01` through `issue-20`; the `calib-`
 issues are not scored). State your rubric's decision, the gold label, and the
 reasoning that produced your rubric's result.]
+```
+{
+  "rubric": "/Users/malihya/.claude/skills/issue-select/rubric.md",
+  "model": "sonnet",
+  "agreement": [
+    1,
+    1
+  ],
+  "results": [
+    {
+      "id": "issue-01",
+      "verdict": "accept",
+      "failed_checks": [
+        "maintainer_replying"
+      ],
+      "checks": [
+        {
+          "name": "maintainer_merging",
+          "grade": "pass",
+          "evidence": "Last 5 default-branch commits all dated 2026-08-04 (1 day before capture), authored by named humans codewithdaniel1 and danyeaw"
+        },
+        {
+          "name": "maintainer_replying",
+          "grade": "fail",
+          "evidence": "Only #16275 of 5 sampled issues got a maintainer reply, and it took 32.9 days; #16493, #16231, #16023, #16026 got none"
+        },
+        {
+          "name": "repo_in_use",
+          "grade": "pass",
+          "evidence": "Not archived; latest release 26.7.0 on 2026-07-31; last push 2026-08-04"
+        },
+        {
+          "name": "scope_bounded",
+          "grade": "pass",
+          "evidence": "Title: 'Add permanent docs for installing PyPI packages with conda install' \u2014 single add-request, not a question"
+        },
+        {
+          "name": "unclaimed",
+          "grade": "pass",
+          "evidence": "Issue state open, assignees: none, linked PRs: none, 0 comments"
+        },
+        {
+          "name": "ai_policy",
+          "grade": "pass",
+          "evidence": "CONTRIBUTING.md: 'generative AI tools welcome; you are responsible for all contributions and must review and understand AI-generated content'"
+        },
+        {
+          "name": "spec_included",
+          "grade": "pass",
+          "evidence": "Body lists exact files to add/update (new task page, manage-pkgs.rst, pip-interoperability.rst, new-features.md, troubleshooting.rst) with detailed content requirements for each"
+        }
+      ],
+      "error": null
+    }
+  ]
+}
+```
 
 **Check rationale**
 
