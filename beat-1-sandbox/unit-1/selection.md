@@ -14,9 +14,7 @@ wrong label is not graded.
 ## Selected issue
 
 **Issue link**
-
-[The individual Path Review issue page. A link to the repository or the issue list
-does not satisfy this field.]
+https://github.com/codepath/pathreview-ai301-fa26-s3/issues/54 
 
 **Verdict output**
 
@@ -30,7 +28,38 @@ partial re-run costs about $0.20 — or run the skill on different candidates. O
 recording `reject` for the issue you chose earns no credit for this field.
 
 ```
-paste the output here, including the closing JSON block
+  #54 — Resume section detection fails on text with leading whitespace
+  - scope_bounded: pass — one specific bug in one function.
+  - spec_included: pass — names file/function, runnable repro snippet with
+    observed vs. expected output, and the exact failing tests.
+  - Verdict: accept
+{
+      "item": "https://github.com/codepath/pathreview-ai301-fa26-s3/issues/54",
+      "checks": [
+        {"name": "maintainer_merging", "grade": "pass", "evidence": "Last 5 
+  default-branch commits (through 2026-09-16) all authored by human Aburke225"},
+        {"name": "maintainer_replying", "grade": "pass", "evidence":
+  "Collaborator Aburke225 commented 2026-09-16 closing resolved issues in the 
+  response sample"},
+        {"name": "repo_in_use", "grade": "pass", "evidence": "Not archived; no 
+  releases but pushed_at 2026-09-16, within 90 days"},
+        {"name": "scope_bounded", "grade": "pass", "evidence": "Title: 'Resume 
+        {"name": "scope_bounded", "grade": "pass", "evidence": "Title: 'Resume section
+  detection fails on text with leading whitespace' — one specific bug"},
+        {"name": "unclaimed", "grade": "pass", "evidence": "state=open, assignees=[], no
+  cross-referenced PRs, comments=0"},
+        {"name": "ai_policy", "grade": "pass", "evidence": "No
+  CONTRIBUTING.md/AI_POLICY.md/AGENTS.md found (all 404); PR template has no AI-disclosure
+  cross-referenced PRs, comments=0"},
+        {"name": "ai_policy", "grade": "pass", "evidence": "No
+  CONTRIBUTING.md/AI_POLICY.md/AGENTS.md found (all 404); PR template has no AI-disclosure
+  clause"},
+        {"name": "spec_included", "grade": "pass", "evidence": "Body names
+  `_detect_sections()` in `resume_parser.py`, gives runnable repro code with observed vs
+  expected output, and lists 3 related failing tests"}
+      ],
+      "verdict": "accept"
+    }
 ```
 
 ---
