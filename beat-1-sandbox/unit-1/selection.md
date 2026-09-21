@@ -301,10 +301,15 @@ This is also the basis for the claim comment you write in Unit 2.
 
 [Answer all three:
 
-1. The issue's fit to your interests and to the time available.
+1. The issue's fit to your interests and to the time available:
+     I am interested in this issue because I would like more experience with ingestion issues. I am still new to open source contribution and although it is a tier-1 issue, the bug itself is important to fix since it is not detecting a resume section properly.
+   
 2. What the verdict identified correctly, and what you weighed that the rubric could
-   not.
-3. The anticipated difficulty in claiming it.]
+   not:
+   The verdict was able to correctly identify that it that is a self-contained reproduction and there was no DB/Docker/service needed to be verified (or else it might be too advanced for me). One thing I weighed that the rubric did not was how clearly the reproduction steps were written. The check had it, but I weighed the code snippet the issue included for reproducing the bug to be very important because it can save time figuring out how to reproduce the bug. 
+   
+3. The anticipated difficulty in claiming it.:
+   I anticipate it to be more on the easy side since it is a parsing issue, however getting set up can take some time since somewhat new to open source contribution.  
 
 ---
 
