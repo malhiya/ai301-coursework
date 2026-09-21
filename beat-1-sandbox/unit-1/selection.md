@@ -278,9 +278,11 @@ issue-01:
 ```
 
 **Check rationale**
+Quoted from `rubric.md` as currently written:
 
-[One check from the `rubric.md` uploaded to `tools/issue-select/`, quoted as it is
-currently written, with the reasoning behind its current form.]
+`| maintainer_merging | Last 5 default-branch commits and their authors (Repo facts) | At least one of the last 5 commits is from the last 60 days and was made by a person. A bot commit only counts if it merged a person's PR. | required |`
+
+I wrote it this way because a repo with recent code changes but no real person behind them can leave a pull request unreviewed. Recent commits show that someone is still merging work, and I only count bots when they merged a person's PR, because a bot on its own doesn't show a maintainer is around.
 
 **Trade-offs**
 
