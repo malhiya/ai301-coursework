@@ -74,18 +74,31 @@ Quote source text directly in each field below. Paraphrase does not satisfy them
 only one run occurred. **The last score in your list must match the agreement line in the
 `eval-run.txt` you committed** — that file is the record of your final run.]
 
-1. `agreement: 2/3 scored items` (smoke run, `--limit 3`)
-2. `agreement: 0/1 scored items` (`--only issue-01`)
-3. `agreement: 0/1 scored items` (`--only issue-01`, again after rewording `scope_bounded`)
-4. `agreement: 1/1 scored items` (`--only issue-01`, after `scope_bounded` became a title-only test)
-5. `agreement: 18/20 scored items  (bar: 18/20: PASS)` (full run, saved as `eval-run.txt`)
+```
+cd ~/Codepath/ai301/ai301-unit1-starter/eval
 
+# Run 1: smoke run, 2/3
+python3.12 run_eval.py --rubric ~/.claude/skills/issue-select/rubric.md --limit 3 --out smoke.json
+
+# Run 2: after "Touching several files is fine", 0/1
+python3.12 run_eval.py --rubric ~/.claude/skills/issue-select/rubric.md --only issue-01
+
+# Run 3: same wording, re-run to save the evidence, 0/1
+python3.12 run_eval.py --rubric ~/.claude/skills/issue-select/rubric.md --only issue-01 --out one.json
+
+# Run 4: after the "one goal, one PR" wording, 0/1
+python3.12 run_eval.py --rubric ~/.claude/skills/issue-select/rubric.md --only issue-01 --out one.json
+
+# Run 5: after the title-only scope_bounded, 1/1
+python3.12 run_eval.py --rubric ~/.claude/skills/issue-select/rubric.md --only issue-01
+
+# Run 6: full run, 18/20, saved as eval-run.txt
+python3.12 run_eval.py --rubric ~/.claude/skills/issue-select/rubric.md --out results.json --save-run eval-run.txt
+```
 
 **Issue analysis**
 
-[One scored issue, identified by id (`issue-01` through `issue-20`; the `calib-`
-issues are not scored). State your rubric's decision, the gold label, and the
-reasoning that produced your rubric's result.]
+issue-01:
 ```
 {
   "rubric": "/Users/malihya/.claude/skills/issue-select/rubric.md",
