@@ -17,16 +17,6 @@ wrong label is not graded.
 https://github.com/codepath/pathreview-ai301-fa26-s3/issues/54 
 
 **Verdict output**
-
-[Your skill's live-mode output for this issue, pasted verbatim and ending with the
-fenced JSON verdict block. A summary does not satisfy this field.]
-
-**The verdict must record `accept` for this issue.** Choose an issue your own skill
-accepts. If your skill rejects every candidate you try, that is a signal about your
-rubric rather than about the issues: revise it and re-run — retries are unlimited and a
-partial re-run costs about $0.20 — or run the skill on different candidates. Output
-recording `reject` for the issue you chose earns no credit for this field.
-
 ```
   #54 — Resume section detection fails on text with leading whitespace
   - scope_bounded: pass — one specific bug in one function.
@@ -60,6 +50,136 @@ recording `reject` for the issue you chose earns no credit for this field.
       ],
       "verdict": "accept"
     }
+    ```
+
+**The verdict must record `accept` for this issue.** Choose an issue your own skill
+accepts. If your skill rejects every candidate you try, that is a signal about your
+rubric rather than about the issues: revise it and re-run — retries are unlimited and a
+partial re-run costs about $0.20 — or run the skill on different candidates. Output
+recording `reject` for the issue you chose earns no credit for this field.
+
+```
+   Summary
+
+  Repo-level facts (apply to all three issues): not archived; last push
+  2026‑09‑16 (4 days old, no releases but within 90‑day window) → repo_in_use
+  pass. Last 5 commits all from a human (Aburke225) dated 2026‑09‑16 →
+  maintainer_merging pass. A collaborator (Aburke225) commented on issues as
+  recently as 2026‑09‑16, closing resolved issues → maintainer_replying pass. No
+  CONTRIBUTING.md/AI policy file found anywhere in the repo, and the PR
+  template has no AI-disclosure requirement → ai_policy pass (silence).
+
+  All three issues: open, no assignee, no linked/cross-referenced PRs, zero
+  comments → unclaimed pass.
+
+  #61 — Health check DB probe passes a raw SQL string
+  - scope_bounded: pass — title names one specific fix (SQLAlchemy 2.x text()
+    wrapping).
+  - spec_included: pass — names file (api/routes/health.py), exact error, repro
+    steps.
+  - Verdict: accept
+  
+  #54 — Resume section detection fails on text with leading whitespace
+  - scope_bounded: pass — one specific bug in one function.
+  - spec_included: pass — names file/function, runnable repro snippet with
+    observed vs. expected output, and the exact failing tests.
+  - Verdict: accept
+
+  #45 — No property-based tests for the PII scrubber
+  - scope_bounded: pass — one bounded deliverable (hypothesis-based tests for
+    one module), not a question or umbrella.
+  - spec_included: pass — names the test file and gives an effort estimate
+    (4–6h).
+  - Verdict: accept
+  
+  Ranking: the rubric's preferred checks tie all three (all pass
+  maintainer_replying and spec_included), so the fit profile
+  (Python/JS/TS/React/Java, wants tier‑1/2, avoid Docker/paid-API setup) breaks
+  the tie: #54 ranks first — it's a pure-Python parsing bug with a
+  self-contained repro, no DB/Docker/service needed to verify. #61 is second —
+  also tier‑1 and a one-line fix, but touches the DB health-check path. #45 is
+  third — tier‑2, a bigger 4–6h effort requiring learning hypothesis rather than
+  a quick bug fix.
+
+  [
+    {
+      "item": "https://github.com/codepath/pathreview-ai301-fa26-s3/issues/54",
+      "checks": [
+        {"name": "maintainer_merging", "grade": "pass", "evidence": "Last 5 
+  default-branch commits (through 2026-09-16) all authored by human Aburke225"},
+        {"name": "maintainer_replying", "grade": "pass", "evidence":
+  "Collaborator Aburke225 commented 2026-09-16 closing resolved issues in the 
+  response sample"},
+        {"name": "repo_in_use", "grade": "pass", "evidence": "Not archived; no 
+  releases but pushed_at 2026-09-16, within 90 days"},
+        {"name": "scope_bounded", "grade": "pass", "evidence": "Title: 'Resume 
+        {"name": "scope_bounded", "grade": "pass", "evidence": "Title: 'Resume section
+  detection fails on text with leading whitespace' — one specific bug"},
+        {"name": "unclaimed", "grade": "pass", "evidence": "state=open, assignees=[], no
+  cross-referenced PRs, comments=0"},
+        {"name": "ai_policy", "grade": "pass", "evidence": "No
+  CONTRIBUTING.md/AI_POLICY.md/AGENTS.md found (all 404); PR template has no AI-disclosure
+  cross-referenced PRs, comments=0"},
+        {"name": "ai_policy", "grade": "pass", "evidence": "No
+  CONTRIBUTING.md/AI_POLICY.md/AGENTS.md found (all 404); PR template has no AI-disclosure
+  clause"},
+        {"name": "spec_included", "grade": "pass", "evidence": "Body names
+  `_detect_sections()` in `resume_parser.py`, gives runnable repro code with observed vs
+  expected output, and lists 3 related failing tests"}
+      ],
+      "verdict": "accept"
+    },
+    {
+        {"name": "spec_included", "grade": "pass", "evidence": "Body names
+  `_detect_sections()` in `resume_parser.py`, gives runnable repro code with observed vs
+  expected output, and lists 3 related failing tests"}
+      ],
+      "verdict": "accept"
+    },
+    {
+      "item": "https://github.com/codepath/pathreview-ai301-fa26-s3/issues/61",
+      "checks": [
+        {"name": "maintainer_merging", "grade": "pass", "evidence": "Last 5
+  default-branch commits (through 2026-09-16) all authored by human Aburke225"},
+        {"name": "maintainer_replying", "grade": "pass", "evidence": "Collaborator
+  Aburke225 commented 2026-09-16 closing resolved issues in the response sample"},
+        {"name": "repo_in_use", "grade": "pass", "evidence": "Not archived; no releases
+  but pushed_at 2026-09-16, within 90 days"},
+        {"name": "scope_bounded", "grade": "pass", "evidence": "Title: 'Health check DB
+  probe passes a raw SQL string, which fails under SQLAlchemy 2.x' — one specific fix"},
+        {"name": "unclaimed", "grade": "pass", "evidence": "state=open, assignees=[], no
+  cross-referenced PRs, comments=0"},
+        {"name": "ai_policy", "grade": "pass", "evidence": "No
+  CONTRIBUTING.md/AI_POLICY.md/AGENTS.md found (all 404); PR template has no
+  AI-disclosure clause"},
+        {"name": "spec_included", "grade": "pass", "evidence": "Body names
+  `api/routes/health.py`, the exact SQLAlchemy ArgumentError text, and repro steps via
+  GET /health"}
+      ],
+      "verdict": "accept"
+    },
+    {
+      "item": "https://github.com/codepath/pathreview-ai301-fa26-s3/issues/45",
+      "checks": [
+        {"name": "maintainer_merging", "grade": "pass", "evidence": "Last 5
+  default-branch commits (through 2026-09-16) all authored by human Aburke225"},
+        {"name": "maintainer_replying", "grade": "pass", "evidence": "Collaborator
+  Aburke225 commented 2026-09-16 closing resolved issues in the response sample"},
+        {"name": "repo_in_use", "grade": "pass", "evidence": "Not archived; no releases 
+  but pushed_at 2026-09-16, within 90 days"},
+        {"name": "scope_bounded", "grade": "pass", "evidence": "Title: 'No property-based
+  tests for the PII scrubber' — one bounded deliverable, not a question or umbrella"},
+        {"name": "unclaimed", "grade": "pass", "evidence": "state=open, assignees=[], no 
+  cross-referenced PRs, comments=0"},
+        {"name": "ai_policy", "grade": "pass", "evidence": "No 
+  CONTRIBUTING.md/AI_POLICY.md/AGENTS.md found (all 404); PR template has no 
+  AI-disclosure clause"},
+        {"name": "spec_included", "grade": "pass", "evidence": "Body names 
+  `tests/unit/test_pii_scrubber.py` and gives an estimated effort of 4-6 hours"}
+      ],
+      "verdict": "accept"
+    }
+  ]
 ```
 
 ---
