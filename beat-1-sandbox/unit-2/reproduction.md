@@ -142,6 +142,8 @@ My first version of behavior-matches had no room for an honest cannot-reproduce,
 result it changes, a canary you re-ran with `--only`, a case you accept it will miss, or a
 stated reason nothing changed elsewhere. "Nothing changed, and here is how I know" earns
 the point in full when the reason follows.]
+
+
 conventions-respected only checks the comment against the repo's stated rules, not whether a claim is specific or promises a fix instead of investigation. I tried adding that, and it fixed pkg-19, but it also flipped pkg-20 — my one disclosure package — from a correct reject to an incorrect accept. I reverted the change and reran both packages: pkg-20 still swung between accept and reject on the same wording, so this looks like grading variance, not something my edit caused. I kept the original wording anyway. pkg-19 will keep grading accept, but I'd rather protect the disclosure floor than catch one bad claim comment.
 
 ---
