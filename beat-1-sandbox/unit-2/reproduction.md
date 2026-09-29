@@ -27,9 +27,6 @@ Hi, I'll claim #54. _detect_sections() in resume_parser.py anchors its section-h
 
 Next steps: I'll reproduce it two ways: the ResumeParser().parse(...) snippet from the issue, and the three failing tests it names (test_parse_single_column_resume_text, test_parse_resume_no_work_experience, test_detect_sections). I'll post a repro report with my environment and what I see.
 
-[Link to the comment where you claimed the issue. Use the comment's own permalink, not the
-issue page on its own. **Then paste the text of that comment underneath the link** — the
-pasted text is what this field is graded on, so copy across what you actually posted.]
 
 **Reproduction comment**
 https://github.com/codepath/pathreview-ai301-fa26-s3/issues/54#issuecomment-5893172065
@@ -72,10 +69,6 @@ FAILED test_strip_markdown_syntax
 5 failed, 5 passed
 The three tests the issue names fail on empty detected_sections. test_detect_sections indents Experience:, Education: and Skills: and gets []. The last two also carry the #54 marker but fail on markdown # stripping. I haven't confirmed they share the cause.
 ```
-[Link to the comment where you posted your reproduction. It must record the environment
-(OS, relevant versions, code state), steps a stranger could follow, and what you observed.
-**Then paste the text of that comment underneath the link** — the pasted text is what this
-field is graded on, so copy across what you actually posted.]
 
 ## Eval iterations
 
