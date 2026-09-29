@@ -14,21 +14,60 @@ label is not graded.
 ## Your identity upstream
 
 **GitHub username**
-
-[Your GitHub username, exactly as it appears on your profile — no `@`, no profile URL. Your
-comments upstream are identified by this name.]
+malhiya
 
 ---
 
 ## Posted upstream
 
 **Claim comment**
+https://github.com/codepath/pathreview-ai301-fa26-s3/issues/54#issuecomment-5873103099
+
+Hi, I'll claim #54. _detect_sections() in resume_parser.py anchors its section-header patterns the start of a line, so the PDF-extracted text with leading indentation matches nothing and detected_sections comes back empty.
+
+Next steps: I'll reproduce it two ways: the ResumeParser().parse(...) snippet from the issue, and the three failing tests it names (test_parse_single_column_resume_text, test_parse_resume_no_work_experience, test_detect_sections). I'll post a repro report with my environment and what I see.
 
 [Link to the comment where you claimed the issue. Use the comment's own permalink, not the
 issue page on its own. **Then paste the text of that comment underneath the link** — the
 pasted text is what this field is graded on, so copy across what you actually posted.]
 
 **Reproduction comment**
+https://github.com/codepath/pathreview-ai301-fa26-s3/issues/54#issuecomment-5893172065
+Reproduced: detected_sections comes back empty for indented section headers, as the issue describes.
+
+Environment: pathreview at commit 2f4e82f (fork of main), Python 3.11.15 in a fresh venv, pypdf 6.19.0, pytest 9.1.1, macOS 14.2.1 (x86_64), git 2.38.1 (docs list 2.39 as the minimum; git was only used to clone).
+
+Setup: make setup failed for me as written: plain python3 here is 3.8, so it built a 3.8 venv and pip install -e ".[dev]" stopped with project.license invalid. With 3.11 the dev extras still failed, because libcst had no prebuilt wheel for macOS 14 on Intel and needed a Rust compiler. So I ran only:
+
+python3.11 -m venv .venv
+source .venv/bin/activate
+pip install -e .
+pip install pytest
+I skipped migrations, seeding and the frontend install. The snippet and the unit tests ran without them.
+
+Steps 1: the issue's snippet (saved as repro.py, run with python repro.py):
+
+from ingestion.parsers.resume_parser import ResumeParser
+r = ResumeParser()
+res = r.parse('\n    John Smith\n    john@example.com\n\n    Education:\n    - B.S. Computer Science\n\n    Skills: Python\n')
+print(res.metadata['detected_sections'])
+Output:
+
+[]
+Expected: Education, Skills. Actual: [].
+
+Steps 2: the tests: python -m pytest tests/unit/test_resume_parser.py -v
+
+5 passed, 5 xfailed
+All five are marked xfail(strict=True, reason="issue #54: ..."), so a normal run reports "xfailed", not "failed". Running python -m pytest tests/unit/test_resume_parser.py -v --runxfail shows the real failures:
+
+FAILED test_parse_single_column_resume_text - assert (False or False)
+FAILED test_parse_resume_no_work_experience - assert False
+FAILED test_detect_sections - assert 0 > 0
+FAILED test_parse_markdown_resume
+FAILED test_strip_markdown_syntax
+5 failed, 5 passed
+The three tests the issue names fail on empty detected_sections. test_detect_sections indents Experience:, Education: and Skills: and gets []. The last two also carry the #54 marker but fail on markdown # stripping. I haven't confirmed they share the cause.
 
 [Link to the comment where you posted your reproduction. It must record the environment
 (OS, relevant versions, code state), steps a stranger could follow, and what you observed.
