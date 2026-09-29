@@ -21,6 +21,7 @@ malhiya
 ## Posted upstream
 
 **Claim comment**
+
 https://github.com/codepath/pathreview-ai301-fa26-s3/issues/54#issuecomment-5873103099
 
 Hi, I'll claim #54. _detect_sections() in resume_parser.py anchors its section-header patterns the start of a line, so the PDF-extracted text with leading indentation matches nothing and detected_sections comes back empty.
@@ -29,6 +30,7 @@ Next steps: I'll reproduce it two ways: the ResumeParser().parse(...) snippet fr
 
 
 **Reproduction comment**
+
 https://github.com/codepath/pathreview-ai301-fa26-s3/issues/54#issuecomment-5893172065
 Reproduced: detected_sections comes back empty for indented section headers, as the issue describes.
 
