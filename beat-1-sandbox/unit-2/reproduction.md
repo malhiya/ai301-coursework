@@ -116,10 +116,6 @@ fields.
 
 
 **Package analysis**
-
-[Pick one scored package (`pkg-01` through `pkg-20` — the four `calib-` packages are never
-scored). Name it by id, say what your rubric decided and what the gold label said, and
-explain why your rubric read it that way.]
 pkg-19 (vuejs/core#15205): my rubric graded this **accept**; the gold label is **reject**.
 
 All five required checks passed. `env-recorded`, `behavior-matches`, `honest-outcome`, and `steps-complete` all had real evidence to point to — the report reproduced the issue's exact CSS leak with a named version and OS. `conventions-respected` also passed, with evidence "no stated AI policy" and "no rule against assignment requests; evidence guide treats silence as a pass." That's accurate: vuejs/core's CONTRIBUTING.md states nothing about claim format.
