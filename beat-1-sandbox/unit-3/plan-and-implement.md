@@ -114,29 +114,43 @@ Answer all four sections. Quote source text directly; paraphrase does not satisf
 fields.
 
 **Run history**
+```
+cd ~/Codepath/ai301/ai301-unit3-starter/eval
 
-[The agreement score of each run you did, in order. A single run is a complete answer if
-only one run occurred. **The last score in your list must match the agreement line in the
-`eval-run.txt` you committed** — that file is the record of your final run.]
+# Run 1: first full run, not saved, 18/20
+python3 run_eval.py --rubric ~/.claude/skills/plan-check/rubric.md --evidence ~/.claude/skills/plan-check/references/evidence-guide.md
+
+# Run 2: same files, confirming full run, saved as eval-run.txt, 18/20 (PASS)
+python3 run_eval.py --rubric ~/.claude/skills/plan-check/rubric.md --evidence ~/.claude/skills/plan-check/references/evidence-guide.md --save-run eval-run.txt
+```
+Scores in order: 18/20, 18/20
+
+I did not change any file between the two runs. Both missed pkg-14 and pkg-20. pkg-14 failed `executable` in run 1 and `executable, honest-unknowns` in run 2, so the grader gave different notes on identical files.
+
 
 **Package analysis**
 
-[Pick one scored package (`pkg-01` through `pkg-20` — the four `calib-` packages are never
-scored). Name it by id, say what your rubric decided and what the gold label said, and
-explain why your rubric read it that way.]
+pkg-01 (httpie/cli#1838, category wrong-cause). My rubric decided reject, and the gold label is reject. The eval-run.txt row reads pkg-01 wrong-cause reject reject yes.
+
+The plan blames the wrong code, and its own repro evidence shows it. The plan says: "The REQUEST_ITEM tokenizer in httpie/cli/requestitems.py is the problem." The repro evidence says: "the request items are never handed to HTTPie's item parser." So the tokenizer never runs. The plan also calls the Python version difference "a red herring", but repro step 3 says the same command on 3.13.5 "prints the full request, exit 0." So the version difference is real, not a red herring.
+
+My diagnosis-matches-evidence check says: "Fail if the cause contradicts the evidence, or isn't tied to it at all." This plan contradicts its own evidence, so it fails.
+
+eval-run.txt doesn't list which checks failed on rows that agree, so this is my own reading of the package against my rubric.
+
 
 **Check rationale**
+From rubric.md, as it reads now:
 
-[Quote one check from the `rubric.md` you uploaded to `tools/plan-check/`, exactly as it reads now.
-Then say why it reads that way — what you revised to get there, or what you rejected in
-favour of it.]
+| diagnosis-matches-evidence | The plan's stated cause, read against what the repro evidence actually shows. | Pass if the stated cause explains the exact behavior the repro evidence shows. Fail if the cause contradicts the evidence, or isn't tied to it at all. | required |
+
+I wrote it as a rule about the outcome, so two people reading the same plan and repro evidence get the same answer. I haven't changed it since my first draft, because that draft already cleared the bar. I considered folding it into targets-cause-not-symptom and rejected that. A plan can name the right cause and still only patch the symptom, which is a different mistake, so each gets its own check.
 
 **Trade-offs**
 
-[Every check gives something up. Any one of these is a complete answer: a package whose
-result it changes, a canary you re-ran with `--only`, a case you accept it will miss, or a
-stated reason nothing changed elsewhere. "Nothing changed, and here is how I know" earns
-the point in full when the reason follows.]
+All seven checks are `required`, and my verdict rule says: "Accept only if every required check passes. A required check graded `unclear` counts as `fail`." The cost is that one strict grade holds a package. In run 1, pkg-14 was rejected on `executable` alone: `pkg-14  clear-accept       accept  reject   NO     failed: executable`. The gold label is accept. In run 2 it failed `executable, honest-unknowns`.
+
+The other miss is `pkg-20  thread-convention  reject  accept   NO     graded accept`. I did not open pkg-14 or pkg-20 to find out why, because the run still cleared the bar: `agreement: 18/20 scored items  (bar: 18/20: PASS)`. The categories line shows `thread-convention 1/2`, so the category floor held only through pkg-04. I accept that cost, because requiring all seven is what lets the rubric hold a plan that is weak in one place.
 
 ---
 
