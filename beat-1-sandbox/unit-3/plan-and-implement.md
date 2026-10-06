@@ -42,8 +42,71 @@ fix/54-indented-section-headers
 
 **Evidence**
 
-[Your Unit 2 reproduction steps re-run against the built change: the before, then the
-after. Paste both, including the commands you ran and their output.]
+Same commands as my repro comment on issue #54. "Before" is commit `2f4e82f` with no changes. "After" is branch `fix/54-indented-section-headers`.
+
+`repro.py` holds the issue's snippet:
+
+```
+from ingestion.parsers.resume_parser import ResumeParser
+r = ResumeParser()
+res = r.parse('\n    John Smith\n    john@example.com\n\n    Education:\n    - B.S. Computer Science\n\n    Skills: Python\n')
+print(res.metadata['detected_sections'])
+```
+
+Before:
+
+```
+$ git rev-parse --short HEAD
+2f4e82f
+$ python --version
+Python 3.11.15
+$ python repro.py
+[]
+$ python -c "from ingestion.parsers.resume_parser import ResumeParser; print(ResumeParser().parse('John Smith\njohn@example.com\n\nEducation:\n- B.S. Computer Science\n\nSkills: Python\n').metadata['detected_sections'])"
+['Education', 'Skills']
+$ python -m pytest tests/unit/test_resume_parser.py -v
+tests/unit/test_resume_parser.py::TestResumeParser::test_parse_single_column_resume_text XFAIL [ 10%]
+tests/unit/test_resume_parser.py::TestResumeParser::test_parse_resume_no_work_experience XFAIL [ 20%]
+tests/unit/test_resume_parser.py::TestResumeParser::test_detect_sections XFAIL [ 70%]
+========================= 5 passed, 5 xfailed in 0.23s =========================
+$ python -m pytest tests/unit/test_resume_parser.py -v --runxfail
+FAILED tests/unit/test_resume_parser.py::TestResumeParser::test_parse_single_column_resume_text
+FAILED tests/unit/test_resume_parser.py::TestResumeParser::test_parse_resume_no_work_experience
+FAILED tests/unit/test_resume_parser.py::TestResumeParser::test_parse_markdown_resume
+FAILED tests/unit/test_resume_parser.py::TestResumeParser::test_detect_sections
+FAILED tests/unit/test_resume_parser.py::TestResumeParser::test_strip_markdown_syntax
+========================= 5 failed, 5 passed in 0.19s =========================
+```
+
+The change:
+
+```
+$ git diff --stat
+ ingestion/parsers/resume_parser.py | 8 ++++----
+ tests/unit/test_resume_parser.py   | 9 ---------
+ 2 files changed, 4 insertions(+), 13 deletions(-)
+```
+
+After:
+
+```
+$ python repro.py
+['Education', 'Skills']
+$ python -c "from ingestion.parsers.resume_parser import ResumeParser; print(ResumeParser().parse('John Smith\njohn@example.com\n\nEducation:\n- B.S. Computer Science\n\nSkills: Python\n').metadata['detected_sections'])"
+['Skills', 'Education']
+$ python -m pytest tests/unit/test_resume_parser.py -v
+tests/unit/test_resume_parser.py::TestResumeParser::test_parse_single_column_resume_text PASSED [ 10%]
+tests/unit/test_resume_parser.py::TestResumeParser::test_parse_resume_no_work_experience PASSED [ 20%]
+tests/unit/test_resume_parser.py::TestResumeParser::test_detect_sections PASSED [ 70%]
+========================= 8 passed, 2 xfailed in 0.24s =========================
+$ python -m pytest tests/unit -q
+6 failed, 372 passed, 50 xfailed, 21 warnings in 19.86s
+```
+
+The indented snippet went from `[]` to `['Education', 'Skills']`. The unindented control still finds the same two sections. The order changed because the result comes from a set. The three tests the issue names now pass. The two markdown tests still show as xfailed, because I did not change `_strip_markdown`.
+
+The 6 failures in the full run are all in `test_review_service.py`. Each says "async def functions are not natively supported", because no async pytest plugin is installed on my machine. I did not run the full suite before my change.
+
 
 ## Eval iterations
 
