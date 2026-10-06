@@ -15,17 +15,22 @@ label is not graded.
 
 **GitHub username**
 
-[Your GitHub username, exactly as it appears on your profile - no @, no
-profile URL. Your comment upstream is identified by this name, and it is
-the only thing that ties it to you. Several students may plan the same
-house issue, so this is what keeps their comments off your score and
-yours off theirs.]
+malhiya
 
 **Plan comment**
+https://github.com/codepath/pathreview-ai301-fa26-s3/issues/54#issuecomment-5996949466
 
-[Link to the comment where you posted your plan on the issue. Use the comment's own
-permalink. **Then paste the text of that comment underneath the link** — the pasted text is
-what this field is graded on, so copy across what you actually posted.]
+Plan for #54, based on my repro above (commit 2f4e82f).
+
+Cause. In ingestion/parsers/resume_parser.py, _detect_sections() only matches a section name right after ^ or \n. A header with spaces before it never matches. That fits what I saw: the issue's snippet returns [], and test_detect_sections gets an empty list.
+
+Change. Let the four patterns in _detect_sections() accept spaces or tabs before the header, then remove the three xfail markers on the tests the issue names. They are strict, so they would fail once the fix works. I'm only touching that function and the test file.
+
+test_parse_markdown_resume and test_strip_markdown_syntax carry the same #54 marker, but they fail on markdown # stripping in _strip_markdown(). The issue doesn't name them, so I'm leaving them alone. Let me know if you want them in this change.
+
+Test. I'll run the same steps as my repro before and after: the issue's snippet, the same snippet without indentation, and tests/unit/test_resume_parser.py. I expect 8 passed and 2 xfailed after. I'll post both outputs.
+
+Not confirmed yet. I haven't run the no-indentation control. I haven't checked what else calls this function. I'll do both before I change any code.
 
 ---
 
@@ -33,10 +38,7 @@ what this field is graded on, so copy across what you actually posted.]
 
 **Branch**
 
-[The name of the branch you built the change on, exactly as it appears in your fork. The
-naming shape is a type prefix, then the issue number, then a short description. **The issue
-number in the branch name must be the number of the issue you claimed** — a name carrying
-any other number does not satisfy this field.]
+fix/54-indented-section-headers 
 
 **Evidence**
 
