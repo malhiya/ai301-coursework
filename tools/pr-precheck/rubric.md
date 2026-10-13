@@ -1,0 +1,16 @@
+# Rubric: is this pull request ready to submit?
+
+## Checks
+
+| Check | Evidence | Pass condition | Weight |
+|---|---|---|---|
+| diff-matches-plan | The files and changes in the diff, read against the plan's scope, files, and approach, plus anything written under Deviations. | Pass if every change in the diff is in the plan or its Deviations, and everything the plan promised is in the diff or its absence is disclosed in Deviations or the description. Fail if the diff quietly does more or less than the plan says. | required |
+| description-matches-diff | The description's Summary and Changes, read against the diff. | Pass if every change the description claims is in the diff, and no change in the diff is left out of the description. Fail if the description claims something the diff doesn't do, or hides a change the diff makes. | required |
+| tests-show-the-fix | The test evidence, read against the plan's test plan and the repro steps. | Pass if the issue's own repro is shown before and after the change, each with its command and its result, and the after result shows the fix working. A result written next to its command counts (for example, a command that prints nothing on success, with the outcome beside it). Extra checks the evidence only mentions, such as a control run or a test count, don't need their own output. Fail if the before or the after of the repro is missing, or the after result doesn't show the fix working. | required |
+| repo-checks-run | The test evidence, read against the checks the repo's PR template or contribution docs list. | Pass if each listed check is named with its outcome (for example, "cargo test -p ignore passes (214 tests)"), or the repo lists no checks. A check that failed or couldn't run passes if the evidence says so and gives the reason. Fail if a listed check is never mentioned, or the evidence only says "tests pass" without naming the check. | required |
+| diff-is-clean | Every hunk in the diff. | Pass if every hunk is part of the change the plan describes. Fail if the diff has debug lines, commented-out code, or edits to files or lines the change doesn't need. | required |
+| standards-followed | The title and description, read against the repo's PR template, contribution policy (including any AI-use rule), and any explicit maintainer direction in the thread. | Pass if every section of the repo's template is filled in (if it has one), the issue is named, every ask the repo states is followed, any AI-use disclosure the repo asks for is present, every ticked box is backed by the test evidence, and any explicit maintainer direction in the thread is followed or answered. Fail if a section is empty, a stated ask is ignored, the disclosure is missing, a box is ticked without evidence, or a maintainer's direction is ignored. | required |
+
+## Verdict rule
+
+Accept only if every check passes. A check graded `unclear` counts as `fail`. A PR that discloses a shortfall in its description or in Deviations can still be accepted: a gap that is stated openly is not a failure of the check it touches. A gap that is hidden is.
