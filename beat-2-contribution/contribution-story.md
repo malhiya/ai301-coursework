@@ -55,10 +55,9 @@ happened; these entries are the toolkit's own timeline.
 All four entries are graded. Keep every heading below, and fill each
 one in the week it belongs to.
 
-**Unit 5: [one line on the tool work]**
+**Unit 5: Issue scout with my own search queries and a rubric fix after the first scan**
 
-[2-4 sentences: what you built (the scout, your strategy), what broke
-or fell short, what changed because of it.]
+I built an issue scout that runs four GitHub search queries I wrote, ranks the results for free, and grades the top five with my rubric. The first scan accepted all five, but one was a real misread: Amadeus #263 passed `unclaimed` even though the reporter said they had a working patch and would send the PR on request. I changed `unclaimed` to read the issue body and fail on that kind of offer, and a re-grade showed Amadeus failing while gaia #3450 and VelaTrace #61 still passed. I also added a created-date cutoff to my queries, but I did not re-scan to check it.
 
 **Unit 6: [one line on the tool work]**
 
