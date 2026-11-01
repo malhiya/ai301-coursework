@@ -91,7 +91,7 @@ I used it to scan GitHub with four queries I wrote, then to grade individual iss
 
 - Difficulties: it passed #263 although the reporter had offered a patch, passed #2813 once despite a linked PR, accepted #160 though staff found it a poor fit, and its two runs on #392 disagreed on one preferred check. All five graded issues in my scan had zero comments, so my fewest-comments rule tied.
 
-- What changed: I made unclaimed read the issue body, replaced my title-only scope check with scope-feasible and added a difficulty note, and added a created-date cutoff to my queries (not re-scanned). 
+- What changed: I made unclaimed read the issue body, replaced my title-only scope check with scope-feasible and added a difficulty note, and added a created-date cutoff to my queries (not re-scanned). I also changed repo_in_use so a recent push is enough.
 
 ---
 
