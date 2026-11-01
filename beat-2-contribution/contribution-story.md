@@ -78,24 +78,18 @@ drafted, what you did with the draft.]
 
 ## Why I Chose This Issue
 
-[1-2 paragraphs in your own words: how you searched, what your scan
-surfaced, what your scout's verdict said, why this issue fits your
-profile, and what you hope to learn. If your scout's verdict on it
-was reject and you chose it anyway, say so here and say why; choosing
-against your own tool silently is what loses points. Close with an
-honest read of the tool itself: where the scout fell short on a real
-wild search and what you changed or would change, or what convinced
-you it held up. **Record the link to your claim comment in this section too.**
-Not claimed yet? Write `claim pending` and today's date where the link goes,
-and add the link the moment your claim lands.]
+I picked #392, "Implement Jest Tests for Image color picker", from the Issue Selection site after my scout scan and a detour: I first claimed open-kgo #160 from my own search, but staff said it wasn't on the site and was poorly specified, so I released it and moved on. My scout graded #392 accept with a "straightforward" difficulty note twice: one component, no assignee or linked PR, an owner who answers claims ("Feel free to work on it" on a sibling issue), and an existing test, colorPicker.test.js, to copy. It fits my profile because it's JavaScript and React and needs no Docker, paid accounts or API keys, and I installed it and ran the existing suite on Node 24 before claiming. I hope to learn how to test a React component with Jest and Testing Library, including mocking a canvas and a file upload. My scout got better after my edits: once unclaimed read the issue body, it rejected an issue where the reporter had a patch ready, and the new difficulty note told me how hard each pick looked. It still isn't perfect, because it accepted #160 even though staff found it a poor fit. I'll check whether "straightforward" was right once I've written the tests. Claim comment: [link] (posted Oct 31, 2026).
 
 **Toolkit**
 
 - Tool: issue-scout (your scout: your search strategy, your rubric),
-  and how you used it
-- What it produced: [the scan and its verdict on this issue, described]
-- Difficulties: [where it fell short, or "none met" if none did]
-- What changed: [what you patched or would update, or "nothing"]
+I used it to scan GitHub with four queries I wrote, then to grade individual issues directly.
+
+- What it produced: My scan surfaced five accepted issues. When I graded #392 directly, it was accepted twice with a "straightforward" difficulty note: one component, no assignee or linked PR, an owner who answers claims, and a similar test to copy. I also graded open-kgo #160 (accept), MaterialX #2813 (reject, open linked PR) and pyhf #1250 (reject, old release).
+
+- Difficulties: it passed #263 although the reporter had offered a patch, passed #2813 once despite a linked PR, accepted #160 though staff found it a poor fit, and its two runs on #392 disagreed on one preferred check. All five graded issues in my scan had zero comments, so my fewest-comments rule tied.
+
+- What changed: I made unclaimed read the issue body, replaced my title-only scope check with scope-feasible and added a difficulty note, and added a created-date cutoff to my queries (not re-scanned). 
 
 ---
 
