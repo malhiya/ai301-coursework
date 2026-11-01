@@ -1,4 +1,4 @@
-# Contribution: [Issue Title]
+# Contribution: Implement Jest Tests for Image color picker
 
 Path: `beat-2-contribution/contribution-story.md`
 
