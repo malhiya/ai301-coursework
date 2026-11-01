@@ -58,11 +58,9 @@ one in the week it belongs to.
 
 I built an issue scout that runs four GitHub search queries I wrote, ranks the results for free, and grades the top five with my rubric. The first scan accepted all five, but one was a real misread: Amadeus #263 passed `unclaimed` even though the reporter said they had a working patch and would send the PR on request. I changed `unclaimed` to read the issue body and fail on that kind of offer, and a re-grade showed Amadeus failing while gaia #3450 and VelaTrace #61 still passed. I also added a created-date cutoff to my queries, but I did not re-scan to check it.
 
-**Unit 6: [one line on the tool work]**
+**Unit 6: A voice guard that checks my posts, and a memory file for the repo**
 
-[2-4 sentences: the voice-guard, the repo-memory file. What broke or
-fell short, and what changed because of it. "Nothing broke" counts when
-it is true - say how you know.]
+I built a voice guard: an Upstream section in my voice guide with five rules for claims, questions and pings, and a hook that checks every comment I post through Claude Code against it. It broke on my Mac at first, because the guard's script uses a type hint that Python 3.8 can't read and my plain python3 is 3.8, so I pointed the hook at python3.12 and the wiring test then blocked as expected. My claim also had to say when I'd report back, which my "no promised timelines" rule forbade, so I changed it to allow a date for my repro report but never for a fix. I also wrote a 32-line CLAUDE.local.md for the repo, and when I asked a fresh Claude Code session how to run the tests, it gave my Node 24 command and warned against npm run format without exploring the repo.
 
 **Unit 7: [one line on the tool work]**
 
