@@ -129,26 +129,32 @@ the relevant versions (language, runtime, package manager, the project
 itself), and how you set the project up. Then the challenges you faced
 and how you solved them, or that none came up.]
 
+macOS 14.2.1 (x86_64). The repo is Bashamega/WebDevTools at commit 59d2d54 (2026-09-14), package version 2.1.1, cloned from my fork, which matches upstream main. Node v24.22.2 (run through `npx -y -p node@24`; my default is v22.19.0), npm 10.9.3, Jest 30.5.1. I installed with `npm ci`. One challenge: on Node 22.19.0 two unrelated suites (CardForm and JsonGenerator) fail because Jest can't load the ES module @faker-js/faker, and the repo's pre-commit hook runs the tests too. I fixed it by running tests and commits under Node 24 with npx instead of changing my system Node, which matches CI (it uses the latest Node). npm ci also printed peer-dependency warnings and "46 vulnerabilities"; I did not run npm audit fix, because it would rewrite package files outside this issue.
+
 **Steps to Reproduce**
 
-1. [Step 1]
-2. [Step 2]
-3. [Observed result]
+1. On main, run `git rev-parse --short HEAD`: it prints 59d2d54.
+2. Run `npm ci`.
+3. Run `ls src/app/customizer/image-color-picker`.
+4. Run `grep -rln "image-color-picker" src __tests__ --include="*.test.*"; echo "grep exit: $?"`.
+5. Run `npx -y -p node@24 -c 'npm test'`, then `npx -y -p node@24 -c 'npm run test:coverage'`.
+6. Observed result: the folder holds only page.jsx, no test file mentions the component, all 8 suites (31 tests) pass and none is for it, and the coverage table has no row for it.
 
 **Reproduction Evidence**
 
-- **Commit showing reproduction:** [link to commit in your fork]
-- **Screenshots/logs:** [if applicable]
+- **Commit showing reproduction:** none (the gap is the absence of a test file, so there is nothing to commit; the folder at that commit is https://github.com/Bashamega/WebDevTools/tree/59d2d54/src/app/customizer/image-color-picker)
+- **Screenshots/logs:** `ls` prints `page.jsx` only. The grep prints no files and `grep exit: 1`. `Test Suites: 8 passed, 8 total`, `Tests: 31 passed, 31 total`. Coverage has a row for `app/customizer/colorPicker` (95.45% statements) and none for `image-color-picker`.
 - **My findings:** [what you discovered during reproduction; an
   honest, evidenced cannot-reproduce that led you to re-pick or ask
-  the maintainer belongs here and costs you nothing]
+  the maintainer belongs here and costs you nothing] reproduced. This is a missing-tests issue and not a runtime bug, so reproducing it meant confirming the gap, and the gap is there. The sibling Color Picker already has a test I can copy. I expect the canvas and file upload to need mocks in jsdom, but I haven't written any tests yet, so that's a guess.
+
 
 **Toolkit**
 
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
+* Tool: repro-check (my rubric, my evidence guide, and a real-repo scope), used on my claim and then on my claim and repro report together.
+* What it produced: accept. env-recorded, behavior-matches, honest-outcome, conventions-respected and steps-complete passed; evidence-traceable (preferred) failed because my test and coverage output are excerpts and not a full log.
+* Difficulties: it said the repo has no CONTRIBUTING.md (a 404) because the file is named contributing.md in lowercase. The verdict held, but that evidence line was wrong.
+* What changed: nothing in the rubric yet. I'd make the evidence guide look for the contributing file under any capitalization.
 
 ---
 
