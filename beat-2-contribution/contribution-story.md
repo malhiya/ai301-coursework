@@ -78,7 +78,7 @@ drafted, what you did with the draft.]
 
 I picked #392, "Implement Jest Tests for Image color picker", from the Issue Selection site after my scout scan and a detour: I first claimed open-kgo #160 from my own search, but staff said it wasn't on the site and was poorly specified, so I released it and moved on. My scout graded #392 accept with a "straightforward" difficulty note twice: one component, no assignee or linked PR, an owner who answers claims ("Feel free to work on it" on a sibling issue), and an existing test, colorPicker.test.js, to copy. It fits my profile because it's JavaScript and React and needs no Docker, paid accounts or API keys, and I installed it and ran the existing suite on Node 24 before claiming. I hope to learn how to test a React component with Jest and Testing Library, including mocking a canvas and a file upload. My scout got better after my edits: once unclaimed read the issue body, it rejected an issue where the reporter had a patch ready, and the new difficulty note told me how hard each pick looked. It still isn't perfect, because it accepted #160 even though staff found it a poor fit. I'll check whether "straightforward" was right once I've written the tests. 
 
-Claim comment: (https://github.com/Bashamega/WebDevTools/issues/392#issuecomment-6546261532) (posted Oct 31, 2026).
+Claim comment: [link] (posted Oct 31, 2026). The owner replied under it: "Feel free to open a pr".
 
 **Toolkit**
 
