@@ -97,26 +97,29 @@ I used it to scan GitHub with four queries I wrote, then to grade individual iss
 
 **Problem Description**
 
-[In your own words, what is broken or missing?]
+The Image Color Picker page lets you upload an image, click a pixel, and see that pixel's color as hex and RGB, with buttons to copy each one. It has no Jest tests, so nothing would catch it if upload, picking, or copying broke. Issue #392 asks for tests.
 
 **Expected Behavior**
 
-[What should happen?]
+A test file sits next to the component, the way colorPicker has one. It covers the page rendering, the image upload, picking a color, and the two copy buttons. It passes under npm test, and the component shows up in the coverage report.
 
 **Current Behavior**
 
-[What actually happens?]
+On main at 59d2d54, the component's folder holds only page.jsx. No test file mentions it, and npm test passes 8 suites and 31 tests, none of them for this page. The coverage table has no row for it. It is a testing gap, not a runtime bug.
 
 **Affected Components**
 
-[Which parts of the codebase are involved?]
+- src/app/customizer/image-color-picker/page.jsx: the component to test. I won't change it.
+- src/app/customizer/image-color-picker/imageColorPicker.test.js: the new file.
+- src/app/customizer/colorPicker/colorPicker.test.js: the sibling test I'm following for the clipboard and matchMedia mocks.
+- README.md: a short note on running the tests, which the issue asks for.
 
 **Toolkit**
 
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
+- Tool: CLAUDE.local.md, my repo memory file for WebDevTools
+- What it produced: a 32-line file with the repo's conventions, notes on where the image color picker lives and where its sibling tests are, and the exact build and test commands.
+- Difficulties: the first test command I wrote ran on my default Node 22.19.0 and failed 2 of 8 suites on @faker-js/faker. Later, format:check failed on CLAUDE.local.md itself, because Prettier checks local files that git ignores.
+- What changed: I put the Node 24 wrapper (npx -y -p node@24 -c 'npm test') in the commands section, so every later run used it. I ran Prettier on the file, and I now format each local working file before running checks.
 
 ---
 
