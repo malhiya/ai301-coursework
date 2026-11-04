@@ -184,7 +184,7 @@ deliberately NOT changing.]
 
 Add one test file, src/app/customizer/image-color-picker/imageColorPicker.test.js, covering render, file upload, canvas click and the two copy buttons. Add a short "Running the tests" note to the README, because the issue asks for it.
 
-I will not change page.jsx. That includes rgbToHex, which returns "# ff0000" with a space. The tests will not assert the hex string, and I will mention it in the PR as a separate finding. I will not touch other tests, the Jest config, or dependencies.
+I will not test the dark-mode toggle (isDarkMode and toggleTheme), which could count as state. I will not change page.jsx. That includes rgbToHex, which returns "# ff0000" with a space. The tests will not assert the hex string, and I will mention it in the PR as a separate finding. I will not touch other tests, the Jest config, or dependencies.
 
 **Implementation Plan**
 
@@ -204,10 +204,10 @@ why. A recorded deviation is honest work; silent drift is not.]
 
 **Toolkit**
 
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
+- Tool: plan-check
+- What it produced: an accept with 7 of 7 checks passing. It checked my plan against the live thread and the repo at 59d2d54, including that rgbToHex really returns a hex string with a space. One non-blocking note: the dark-mode toggle isn't covered by my planned tests.
+- Difficulties: it accepted on the first run, so it didn't catch a flaw in my plan. I can't say how it would handle a weak plan.
+- What changed: I added one sentence to the plan and to Proposed Solution saying I won't test the dark-mode toggle, so a reviewer who asks about state already has an answer.
 
 ---
 
