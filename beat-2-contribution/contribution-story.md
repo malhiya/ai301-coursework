@@ -167,17 +167,37 @@ macOS 14.2.1 (x86_64). The repo is Bashamega/WebDevTools at commit 59d2d54 (2026
 
 [Your analysis of the root cause: what is causing the issue, traced
 to the files and functions involved.]
+Issue #392 asks for Jest tests for the Image Color Picker. The component is src/app/customizer/image-color-picker/page.jsx. At commit 59d2d54 its folder holds only page.jsx, no test file mentions it, and it has no row in the coverage report. The sibling colorPicker has a test file and 95.45% statement coverage.
+
+The behavior that needs tests is all in page.jsx:
+- handleImageUpload reads the chosen file with FileReader and sets the image, which makes the canvas appear.
+- handleCanvasClick reads one pixel with getImageData and sets the color to rgb(r, g, b).
+- rgbToHex builds the hex text shown on the page.
+- handleHex and handleRGB copy to the clipboard and show a toast.
+
+jsdom has no canvas, so the tests have to mock getContext and getBoundingClientRect. Clipboard and matchMedia get the same mocks that colorPicker.test.js uses.
 
 **Proposed Solution**
 
 [High-level description of your fix approach, and what you are
 deliberately NOT changing.]
 
+Add one test file, src/app/customizer/image-color-picker/imageColorPicker.test.js, covering render, file upload, canvas click and the two copy buttons. Add a short "Running the tests" note to the README, because the issue asks for it.
+
+I will not change page.jsx. That includes rgbToHex, which returns "# ff0000" with a space. The tests will not assert the hex string, and I will mention it in the PR as a separate finding. I will not touch other tests, the Jest config, or dependencies.
+
 **Implementation Plan**
 
-1. [Modify file X to do Y]
-2. [Add or change Z]
-3. [Update tests]
+1. Make the branch test/392-image-color-picker.
+2. Create imageColorPicker.test.js with the mocks for canvas getContext, getBoundingClientRect, clipboard and matchMedia.
+3. Add the render tests: the upload prompt, the Hex and RGB labels, no canvas before an upload.
+4. Add the upload tests, using waitFor because FileReader is async: the input accepts images and the canvas appears after a file is chosen.
+5. Add the canvas-click test with mocked pixel data [255, 0, 0, 255]: the page shows rgb(255, 0, 0).
+6. Add the copy-button tests: the RGB button calls the clipboard with the rgb string and shows its toast, and the Hex button shows its toast.
+7. Check the tests can fail: temporarily change a toast message in page.jsx, confirm a test fails, then restore the file with git checkout. This is not committed.
+8. Run npm test and npm run test:coverage under Node 24, and confirm an image-color-picker row appears.
+9. Run npx prettier --write on the new file, and add the README note.
+10. Commit with a message that says what it does.
 
 [Record deviations here as they happen: what changed mid-build and
 why. A recorded deviation is honest work; silent drift is not.]
