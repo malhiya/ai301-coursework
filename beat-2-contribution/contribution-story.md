@@ -244,20 +244,36 @@ Not covered: the image onload callbacks, because jsdom does not load images. The
 [A running log, added to as you work. Date each entry. What you
 built, decisions you made when you made them, wrong turns included.]
 
-**[Date]**
+**Nov 4**
 
-[Entry]
+plan-check accepted my plan on the first run. It noted that the dark-mode toggle was not covered, so I checked the issue again.
 
-**[Date]**
+**Nov 5**
 
-[Entry]
+Made the branch test/392-image-color-picker. Wrote 8 tests, and all passed on the first run. I broke page.jsx on purpose to check that the tests fail, and they did.
+
+**Nov 5**
+
+I had written the two copy-button tests as separate near-copies. I merged them into one test.each, the way colorPicker.test.js does it.
+
+**Nov 5**
+
+I pasted a script into the test file in my editor instead of running it in the terminal. I rewrote the file from the clean version and the tests passed again.
+
+**Nov 5**
+
+The issue lists state management, so I reversed my plan and added a dark-mode toggle test (plan.md and the plan above now say so). It fails when I disable the toggle.
+
+**Nov 5**
+
+Added a Running the Tests section to the README because the issue asks for docs. Prettier accepted it without changes, so I did not run --write on the README. Three commits: the tests, the toggle test, the README.
 
 **Toolkit**
 
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
+- Tool: CLAUDE.local.md (my repo memory file)
+- What it produced: the Node 24 command for every test run and commit, and the note that colorPicker.test.js is the pattern to follow, which is where I copied the clipboard and matchMedia mocks from.
+- Difficulties: none during the build. All three commits passed the repo's pre-commit hook (format check and the full test suite).
+- What changed: nothing was needed this week.
 
 ---
 
