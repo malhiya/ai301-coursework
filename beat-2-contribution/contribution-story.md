@@ -218,12 +218,24 @@ against the built change (before and after), and the repo's own test
 suite or checks with the outcome shown. "Tests pass" with nothing
 observable named is not a strategy.]
 
+I re-ran my reproduction steps on main and on my branch, and ran the three checks from my ship manifest on both (full output in test_evidence.md, Node 24).
+
+Before (main at 59d2d54): the folder lists only page.jsx. npm test passes 8 suites and 31 tests, none for this page. The coverage table has no row for image-color-picker.
+
+After (branch at 7e3a1e9): the folder also has imageColorPicker.test.js. npm test passes 9 suites and 40 tests. The coverage table has a row for image-color-picker: 80.3% statements, 86.66% branches, 66.66% functions, 81.25% lines. npm run test:coverage and npm run format:check also exit 0.
+
+One step does not change: the grep for the text "image-color-picker" in test files still exits 1, because the new test imports ./page, like colorPicker.test.js. The folder listing and coverage row are the evidence.
+
+To show the tests can fail, I temporarily changed page.jsx and ran the new tests: the toast text and the accept attribute broke 2 tests, and disabling the dark-mode toggle broke 1. I restored the file with git checkout each time.
+
+Not covered: the image onload callbacks, because jsdom does not load images. The tests check the hex digits but not the hex string, because the page shows "# ff0000" with a space. I left that bug for a separate issue.
+
 **Toolkit**
 
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
+- Tool: my ship manifest (ship-manifest.md)
+- What it produced: the three checks to run before and after my change (unit tests, coverage, format check), each written the way it runs in a fresh terminal. I ran them on main and on my branch, with a small script to repeat the same steps on both.
+- Difficulties: the format check exited 1 on my first run, before I had changed any code. Prettier checks my local files (CLAUDE.local.md and ship-manifest.md), which git ignores.
+- What changed: I ran Prettier on those two files, and now do the same for each working file I make (plan.md, plan-comment.md, test_evidence.md).
 
 ---
 
