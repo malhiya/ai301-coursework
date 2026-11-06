@@ -167,6 +167,7 @@ macOS 14.2.1 (x86_64). The repo is Bashamega/WebDevTools at commit 59d2d54 (2026
 
 [Your analysis of the root cause: what is causing the issue, traced
 to the files and functions involved.]
+
 Issue #392 asks for Jest tests for the Image Color Picker. The component is src/app/customizer/image-color-picker/page.jsx. At commit 59d2d54 its folder holds only page.jsx, no test file mentions it, and it has no row in the coverage report. The sibling colorPicker has a test file and 95.45% statement coverage.
 
 The behavior that needs tests is all in page.jsx:
@@ -200,8 +201,9 @@ I will not test the dark-mode toggle (isDarkMode and toggleTheme), which could c
 9. Run npx prettier --write on the new file, and add the README note.
 10. Commit with a message that says what it does.
 
-[Record deviations here as they happen: what changed mid-build and
-why. A recorded deviation is honest work; silent drift is not.]
+**Deviations**
+
+Added a dark-mode toggle test, which the plan said I would not do. The issue lists state management under its unit tests, and plan-check had noted that the toggle was not covered. I removed the "I won't test the dark-mode toggle" sentence from Proposed Solution and from plan.md. Nothing else in the plan changed.
 
 **Toolkit**
 
@@ -210,9 +212,6 @@ why. A recorded deviation is honest work; silent drift is not.]
 - Difficulties: it accepted on the first run, so it didn't catch a flaw in my plan. I can't say how it would handle a weak plan.
 - What changed: I added one sentence to the plan and to Proposed Solution saying I won't test the dark-mode toggle, so a reviewer who asks about state already has an answer.
 
-**Deviations**
-
-Added a dark-mode toggle test, which the plan said I would not do. The issue lists state management under its unit tests, and plan-check had noted that the toggle was not covered. I removed the "I won't test the dark-mode toggle" sentence from Proposed Solution and from plan.md. Nothing else in the plan changed.
 
 ---
 
@@ -249,6 +248,7 @@ Not covered: the image onload callbacks, because jsdom does not load images. The
 [A running log, added to as you work. Date each entry. What you
 built, decisions you made when you made them, wrong turns included.]
 
+
 **Nov 4**
 
 plan-check accepted my plan on the first run. It noted that the dark-mode toggle was not covered, so I checked the issue again.
@@ -284,27 +284,24 @@ Added a Running the Tests section to the README because the issue asks for docs.
 
 ## Pull Request
 
-**PR Link:** [GitHub PR URL when opened]
+**PR Link:** https://github.com/Bashamega/WebDevTools/pull/696#issue-6247180333
 
-**PR Description:** [what the PR says; much of the content above
-adapts into it]
+**PR Description:** 
+
+Adds Jest tests for the Image Color Picker, which had none, and a short "Running the Tests" section in the README, since the issue asks for docs. The new file, imageColorPicker.test.js, follows colorPicker.test.js and has 9 tests: rendering, the image-only file input, the canvas after an upload, picking a color, the dark-mode toggle, and the RGB and Hex copy buttons. The tests mock the canvas, the clipboard and matchMedia. page.jsx is unchanged and no dependencies were added. Fixes #392. On Node 24, main had 8 suites and 31 tests with no coverage row for the page. The branch has 9 suites and 40 tests, and the page has a coverage row (80.3% statements). I broke page.jsx on purpose to check the tests fail, and they did. I did not test in a browser. The page shows the hex text as "# ff0000" with a space, which I left alone. The description also says how I used AI.
 
 **Maintainer Feedback:**
 
-- [Date]: [feedback received, or "none yet"; silence is a normal
-  state and costs you nothing]
-- [Date]: [how you addressed it]
+- Nov 6: none yet. The repo's Jest and Prettier checks passed on the PR. The Vercel check was waiting for a maintainer's authorization, which is normal for a PR from a fork, and the CodeRabbit bot was still processing.
 
-**Status:** [Awaiting review / Iterating / Merged / Closed. The
-status is a fact you record, never a grade: the PR is graded as
-opened.]
+**Status:** Awaiting review
 
 **Toolkit**
 
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
+- Tool: ship-gate (with my ship manifest and pr-precheck)
+- What it produced: PASS on its first run. My three manifest checks (tests, coverage, format) passed in 10, 7 and 3 seconds, and all six pr-precheck checks passed. When I opened the PR through Claude Code within 30 minutes, it let it through without running again.
+- Difficulties: the hook test showed one stop, not two, so I ran the voice guard by hand to confirm it also works. The format check first failed on my own local files, which Prettier checks even though git ignores them. When I opened the PR, Claude Code tried to add a footer line to pr_draft.md, which would have voided the pass, so I rejected the edit.
+- What changed: I formatted my local working files, and I told Claude Code not to edit the description. I did not change my rubric or manifest. Because it passed the first time, I did not see it reject anything.
 
 ---
 
