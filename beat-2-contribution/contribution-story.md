@@ -62,10 +62,9 @@ I built an issue scout that runs four GitHub search queries I wrote, ranks the r
 
 I built a voice guard: an Upstream section in my voice guide with five rules for claims, questions and pings, and a hook that checks every comment I post through Claude Code against it. It broke on my Mac at first, because the guard's script uses a type hint that Python 3.8 can't read and my plain python3 is 3.8, so I pointed the hook at python3.12 and the wiring test then blocked as expected. My claim also had to say when I'd report back, which my "no promised timelines" rule forbade, so I changed it to allow a date for my repro report but never for a fix. I also wrote a 32-line CLAUDE.local.md for the repo, and when I asked a fresh Claude Code session how to run the tests, it gave my Node 24 command and warned against npm run format without exploring the repo.
 
-**Unit 7: [one line on the tool work]**
+**Unit 7:Installed the ship-gate and wrote a ship manifest for WebDevTools, and opened PR #696 after the gate passed**
 
-[2-4 sentences: the ship-gate and your gate manifest. What it produced
-on your real branch, what fought you, what changed because of it.]
+On my branch the ship-gate passed on the first run: all three manifest checks (tests, coverage, format) and all six pr-precheck checks. It then let the PR through without running again. Two things tripped me up. The format check failed before I changed any code, because Prettier checks my local working files even though git ignores them. Later, Claude Code tried to add a footer to my PR description, which would have voided the pass, so I rejected that edit. I formatted my local files and kept the description as I wrote it. Since it passed the first time, I never saw it reject anything.
 
 **Unit 8: [one line on the tool work]**
 
