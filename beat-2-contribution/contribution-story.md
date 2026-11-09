@@ -323,25 +323,23 @@ Adds Jest tests for the Image Color Picker, which had none, and a short "Running
 
 **Technical Skills Gained**
 
-[What you learned technically, named concretely.]
+I learned to test a component that uses a canvas, FileReader and the clipboard by mocking what jsdom lacks (getContext, getBoundingClientRect, the Image class, the clipboard and matchMedia). I used test.each, waitFor and findByText, and a break-it check to prove my tests can fail. I also learned the gh and fork workflow: opening and editing a PR, posting comments and checking CI.
 
 **Challenges Overcome**
 
-[What was hard and how you solved it; point at the real events, the
-Toolkit blocks above are full of them.]
+My default Node 22.19.0 failed two unrelated suites on @faker-js/faker, so I ran everything on Node 24 and wrote that into my manifest. After Bashamega asked me to apply CodeRabbit's comments, I found a real bug (a stray space in the hex code), fixed it in page.jsx and added two tests. I recorded each plan change in my notes.
 
 **What I'd Do Differently Next Time**
 
-[Reflection on your process.]
+I would read the issue's whole task list before writing my plan. I added the dark-mode test late, only after plan-check noted that the issue lists state management. I would also set up the PR monitor before the review arrived, so I could use it during the review and not only after the merge.
 
 ---
 
 ## Resources Used
 
-[What actually helped, not a reading list. List things this story
-already shows you using: the doc you followed to set the environment
-up, the thread that explained the bug, the person who answered you.
-One real entry beats ten plausible ones.]
-
-- [Link to documentation that helped]
-- [Discussion, issue, or post that helped]
+- [colorPicker.test.js](https://github.com/Bashamega/WebDevTools/blob/main/src/app/customizer/colorPicker/colorPicker.test.js): the sibling test I followed for the clipboard and matchMedia mocks and the test style.
+- [The repo's Jest workflow](https://github.com/Bashamega/WebDevTools/blob/main/.github/workflows/jest_tests.yml): where I found the test and coverage commands for my ship manifest.
+- [Jest docs, require of ESM](https://jestjs.io/docs/ecmascript-modules#require-of-esm): the link in Jest's own error message, which told me to use Node 24.9 or newer.
+- [The repo's PR template](https://github.com/Bashamega/WebDevTools/blob/main/.github/PULL_REQUEST_TEMPLATE.md): what my PR description had to answer.
+- [Issue #392](https://github.com/Bashamega/WebDevTools/issues/392): its task list is where I got the README note and the state-management test.
+- [CodeRabbit's review on PR #696](https://github.com/Bashamega/WebDevTools/pull/696#issuecomment-6690723554): its three comments, which Bashamega asked me to apply, led to the hex fix and two stronger tests.
