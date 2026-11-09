@@ -66,10 +66,9 @@ I built a voice guard: an Upstream section in my voice guide with five rules for
 
 On my branch the ship-gate passed on the first run: all three manifest checks (tests, coverage, format) and all six pr-precheck checks. It then let the PR through without running again. Two things tripped me up. The format check failed before I changed any code, because Prettier checks my local working files even though git ignores them. Later, Claude Code tried to add a footer to my PR description, which would have voided the pass, so I rejected that edit. I formatted my local files and kept the description as I wrote it. Since it passed the first time, I never saw it reject anything.
 
-**Unit 8: [one line on the tool work]**
+**Unit 8: Installed the PR monitor, wrote a playbook from five merged PRs, and ran it after my PR merged.**
 
-[2-4 sentences: the PR-monitor and your playbook. What it read, what it
-drafted, what you did with the draft.]
+I wrote my playbook from five recent merged PRs on the repo, which usually merge within a day, so I set my nudge at 4 quiet days. I only ran the monitor after Bashamega had already approved and merged the PR, because I had handled the review round by hand, so none of my nudge or walk-away rules came into play. It drafted a thank-you plus a note about a bug in page.jsx that it said CodeRabbit had found; I could not confirm that on the thread, so I left it out and posted a short thank-you in my own words. I did not change the playbook, so I can't say yet whether 4 days is the right threshold.
 
 ---
 
@@ -280,6 +279,8 @@ Added a Running the Tests section to the README because the issue asks for docs.
 
 Bashamega requested changes and asked me to apply CodeRabbit's comments. First I changed the tests only, and the two hex-related tests failed against the old rgbToHex, which confirmed the space was a real bug. Then I removed the space in page.jsx and all 10 tests passed. Pushed as b27199c, updated the PR description, replied on the thread, and re-requested review.
 
+
+
 **Toolkit**
 
 - Tool: CLAUDE.local.md (my repo memory file)
@@ -301,11 +302,13 @@ Adds Jest tests for the Image Color Picker, which had none, and a short "Running
 
 - Nov 6: none yet. The repo's Jest and Prettier checks passed on the PR. The Vercel check was waiting for a maintainer's authorization, which is normal for a PR from a fork, and the CodeRabbit bot was still processing.
 
-- Nov 7: Bashamega requested changes: "Apply the comments from CodeRabbit please". CodeRabbit had three comments on my test file: remove the space in the hex code (and assert the exact value), test that the uploaded image is drawn, and assert the sampled pixel coordinates. The Jest and Prettier checks were passing.
+- Nov 7: Bashamega requested changes: "Apply the comments from CodeRabbit please." CodeRabbit's comments asked for the exact hex value (#ff0000, which needed a one-character fix in page.jsx), a test that the uploaded image is drawn, and a test that asserts the sampled pixel coordinates.
   
-- Nov 7: Applied all three in b27199c, including a one-character fix in page.jsx (the hex code now has no space). Updated the PR description, replied on the thread, and re-requested review.
+- Nov 7: I applied all three in b27199c, updated the PR description, replied on the thread, and re-requested review.
+- 
+- Nov 7: Bashamega approved and merged the PR, and #392 closed automatically. I thanked him on the thread.
 
-**Status:** Awaiting review
+**Status:** Merged
 
 **Toolkit**
 
