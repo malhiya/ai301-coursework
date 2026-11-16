@@ -1,9 +1,9 @@
-This fall, I wrote automated tests for an open-source web tool, and my work was merged into the project. The tests check that the Image Color Picker page in WebDevTools can load a picture, read the color of a clicked pixel, and copy the color code.
+This fall, I had an open-source contribution merged: automated tests for the Image Color Picker in WebDevTools, a collection of web developer tools. The page lets you upload a picture, click a pixel, and copy its color code, and until now nothing tested that it worked.
 
-The page had no tests, so nothing would have warned its maintainers if it broke. I wrote 10 tests, and they now exercise about 86% of the page's code.
+The most useful part wasn't my first draft. While writing the tests, I noticed the page copied color codes with a stray space ("# ff0000"), which isn't a valid color. I decided to leave that for another day and wrote tests that avoided it. They all passed.
 
-The most useful moment came in review. The maintainer asked me to act on an automated reviewer's comments, and one pointed out that the page copied color codes with a stray space ("# ff0000"), which isn't a valid color. My first tests had worked around that instead of catching it. I fixed the bug and rewrote the tests to check exact results, and the pull request was merged.
+Then the review came back. An automated reviewer flagged exactly that stray space, and the maintainer asked me to act on its comments. My tests hadn't caught the bug because I had written them not to look at it. I fixed the one-character bug, rewrote the tests to check the exact value, and the pull request was merged.
 
-What I took from it: a test that accepts "close enough" can pass right over a real bug, so I now check the exact value.
+What stays with me: a passing test only means something if it could have failed. So now I break my own code on purpose to see whether the tests notice.
 
 Pull request: https://github.com/Bashamega/WebDevTools/pull/696
