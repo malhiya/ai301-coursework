@@ -77,4 +77,16 @@ Received: "# ff0000"
 Tests:       2 failed, 8 passed, 10 total
 ```
 
+## Limitations and what's next
+ 
+My tests don't cover everything. Here is what is missing, in plain terms.
+ 
+**What the tests can't check**
+- **Real image loading.** The test environment has no real canvas or images, so my tests use fake ones. Code that only runs when a real browser loads a picture (lines 60–66 and 171 of `page.jsx`) is never tested, and I never tried the page in an actual browser.
+- **Colors the page can't read.** One line in `rgbToHex` (line 76) handles a color it can't understand, and my tests only ever give it valid colors.
+**Review suggestions I didn't apply.** CodeRabbit's second review, right after my fix, left three more ideas:
+- If someone picks one image and then quickly another, the first can finish loading last and show up instead. This bug was already in the page.
+- Clicking the Hex button before picking any pixel copies nothing useful (`undefined`) but still shows a "copied" message.
+- My fake pixel reader returns red even before anything has been drawn.
+**What's next.** I would add a test for each of those three, a test for a color the page can't read, and a real-browser test for loading an image. What I'd do differently: check exact values from the first version, and report the stray space as a bug instead of writing tests that avoided it.
 
