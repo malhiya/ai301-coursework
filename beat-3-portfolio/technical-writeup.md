@@ -8,7 +8,7 @@ WebDevTools is an open-source web app of developer utilities, and its Image Colo
 ### The gap
 I claimed #392 on October 31, and the owner replied "Feel free to open a pr". The color picker component folder held only page.jsx. `npm test` passes 8 suites and 31 tests, none of them covered this page, and the coverage table had no row for it. This was a missing tests issue, not a not a runtime bug, so reproducing it meant confirming that gap.
 
-## What I did
+### What I did
 
 jsdom has no canvas and never loads images, so I mocked what the page uses: `getContext` (with `getImageData` and `drawImage`), `getBoundingClientRect`, the `Image` class, the clipboard, and `matchMedia`. I followed the sibling `colorPicker.test.js` for the style. My default Node 22 failed two unrelated suites on an ES-module import, so I ran everything on Node 24, which also matches CI.
  
