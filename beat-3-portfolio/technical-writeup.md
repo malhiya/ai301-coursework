@@ -38,8 +38,8 @@ test("should toggle dark mode when the theme button is clicked", () => {
 The break-it check above shows this test doing its job: when I disabled the toggle in `page.jsx`, it was the one test that failed. That version had 9 suites and 40 tests, with 80.3% statement coverage on the page.
  
 ### Where my first version fell short
- 
-The page showed the hex value as `# ff0000`, with a space. I noticed it early, but I planned to leave it for a separate issue and wrote tests that avoided asserting the exact string:
+
+I had noticed that the page copied hex codes with a stray space (# ff0000, which is not a valid color) but wrote tests that avoided it; code review flagged it, so I fixed that line and tightened my tests.
  
 ```js
 expect(screen.getByText(/ff0000/)).toBeInTheDocument();
