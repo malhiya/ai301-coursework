@@ -78,9 +78,7 @@ Tests:       2 failed, 8 passed, 10 total
 ```
 
 ## Limitations and what's next
- 
-My tests don't cover everything. Here is what is missing, in plain terms.
- 
+
 **What the tests can't check**
 - **Real image loading.** The test environment has no real canvas or images, so my tests use fake ones. Code that only runs when a real browser loads a picture (lines 60–66 and 171 of `page.jsx`) is never tested, and I never tried the page in an actual browser.
 - **Colors the page can't read.** One line in `rgbToHex` (line 76) handles a color it can't understand, and my tests only ever give it valid colors.
